@@ -23,6 +23,8 @@ class Record:
     def add_phone(self, phone):
         if (len(phone) == 10 and phone.isnumeric()):
             self.phones.append(Phone(phone))
+        else:
+            raise ValueError(f"Phone number: {phone} is wrong")
 
     def remove_phone(self, phone):
         self.phones.remove[phone]
@@ -60,10 +62,10 @@ def main():
     book = AddressBook()
 
     # Створення запису для John
-    john_record = Record("John")
-    john_record.add_phone("1234567890")
-    john_record.add_phone("5555555555")
 
+    john_record = Record("John")
+    add_phone(john_record, "123456890")
+    add_phone(john_record, "5555555555")
 
     # Додавання запису John до адресної книги
     book.add_record(john_record)
@@ -89,6 +91,12 @@ def main():
 
     # Видалення запису Jane
     book.delete("Jane")
+
+def add_phone(record: Record, phone: str):
+    try:
+        record.add_phone(phone)
+    except ValueError as error:
+        print(error)
 
 if __name__ == "__main__":
     main()
